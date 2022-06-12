@@ -2,6 +2,8 @@ from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
 
+from backend import update_label_text
+
 # Create the main window of the application
 root = Tk()
 # Create widgets
@@ -10,7 +12,7 @@ frm = ttk.Frame(root, padding=10)
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
 output_lbl = ttk.Label(content_frm, textvariable=results_txt)
-run_btn = ttk.Button(content_frm, text='Run', command=lambda: results_txt.set(run_btn.configure().keys()))
+run_btn = ttk.Button(content_frm, text='Run', command=lambda: update_label_text(results_txt, str(run_btn.configure().keys())))
 
 footer_frm = ttk.Frame(frm, padding=10)
 quit_btn = ttk.Button(footer_frm, text='Quit', command=root.destroy)
