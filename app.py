@@ -6,6 +6,11 @@ from backend import update_label_text
 
 # Create the main window of the application
 root = Tk()
+root.title('Button Config Options')
+root.minsize(300, 100)
+# Built-in options: error, gray25, gray50, hourglass, info, questhead, question, warning
+root.iconbitmap('hourglass')
+
 # Create widgets
 frm = ttk.Frame(root, padding=10)
 
