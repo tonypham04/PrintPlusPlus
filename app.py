@@ -1,8 +1,9 @@
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
+from tkinter import Text
 
-from backend import update_label_text
+from backend import update_output_text
 
 # Create the main window of the application
 root = Tk()
@@ -16,8 +17,9 @@ frm = ttk.Frame(root, padding=10)
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
-output_lbl = ttk.Label(content_frm, textvariable=results_txt)
-run_btn = ttk.Button(content_frm, text='Run', command=lambda: update_label_text(results_txt, str(run_btn.configure().keys())))
+# output_lbl = ttk.Label(content_frm, textvariable=results_txt)
+output_text = Text(content_frm, state='disabled', wrap='word', bg='#D3D3D3')
+run_btn = ttk.Button(content_frm, text='Run', command=lambda: update_output_text(output_text, str(run_btn.configure().keys())))
 
 footer_frm = ttk.Frame(frm, padding=10)
 quit_btn = ttk.Button(footer_frm, text='Quit', command=root.destroy)
@@ -27,11 +29,11 @@ frm.grid()
 
 content_frm.grid(row=0, column=0)
 run_btn.grid(row=0, column=0)
-output_lbl.grid(row=1, column=0)
+output_text.grid(row=1, column=0)
 
 footer_frm.grid(row=1, column=0)
 quit_btn.grid(row=0, column=0)
 
 root.mainloop()
 
-#TODO: https://docs.python.org/3/library/tkinter.html#important-tk-concepts
+#TODO: http://tkdocs.com/tutorial/index.html
