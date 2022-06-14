@@ -12,3 +12,10 @@ def update_output_text(text: Text, content: str) -> None:
     text.delete("1.0", "end")
     text.insert("1.0", content)
     text.config(state=current_state)
+
+def reset_output_text(text: Text) -> None:
+    """Deletes all text in a Text widget."""
+    current_state = text.cget('state')
+    text.config(state='normal')
+    text.delete('1.0', 'end')
+    text.config(state=current_state)
