@@ -23,7 +23,6 @@ reset_btn = ttk.Button(button_frm, text='\U0001F5D8 Reset', command=lambda: rese
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
-# output_lbl = ttk.Label(content_frm, textvariable=results_txt)
 output_text = Text(content_frm, state='disabled', wrap='word', bg='#D3D3D3')
 
 footer_frm = ttk.Frame(frm, padding=10)
