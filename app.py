@@ -8,21 +8,21 @@ from backend import reset_output_text
 
 # Create the main window of the application
 root = Tk()
-root.title('Button Config Options')
+root.title('Print++')
 root.minsize(300, 100)
 # Built-in options: error, gray25, gray50, hourglass, info, questhead, question, warning
 root.iconbitmap('hourglass')
+root.resizable(False, False)
 
 # Create widgets
 frm = ttk.Frame(root, padding=10)
 
 button_frm = ttk.Frame(frm, padding=10)
-run_btn = ttk.Button(button_frm, text='Run', command=lambda: update_output_text(output_text, str(run_btn.configure().keys())))
-reset_btn = ttk.Button(button_frm, text='Reset', command=lambda: reset_output_text(output_text))
+run_btn = ttk.Button(button_frm, text='\U00002BC8 Run', command=lambda: update_output_text(output_text, str(run_btn.configure().keys())))
+reset_btn = ttk.Button(button_frm, text='\U0001F5D8 Reset', command=lambda: reset_output_text(output_text))
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
-# output_lbl = ttk.Label(content_frm, textvariable=results_txt)
 output_text = Text(content_frm, state='disabled', wrap='word', bg='#D3D3D3')
 
 footer_frm = ttk.Frame(frm, padding=10)
