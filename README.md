@@ -1,2 +1,3 @@
 # PrintPlusPlus
-The intent behind this project was just a fun way to learn more about the Python programming language and see the output in a custom made GUI as oppose to the console window.
+The intent behind this project was just a fun way to learn more about the Python programming language and see the output from playing with different python functions/features in a custom made GUI as oppose to the console window.  
+![Screen capture of the frontend of PrintPlusPlus featuring a run button and a reset button at the top, a large text area in the middle and a quit button at the bottom.](images/ui.png "Print++ UI")
