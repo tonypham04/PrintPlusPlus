@@ -6,6 +6,8 @@ from tkinter import Text
 from backend import update_output_text
 from backend import reset_output_text
 
+from service import run
+
 # Create the main window of the application
 root = Tk()
 root.title('Print++')
@@ -18,7 +20,7 @@ root.resizable(False, False)
 frm = ttk.Frame(root, padding=10)
 
 button_frm = ttk.Frame(frm, padding=10)
-run_btn = ttk.Button(button_frm, text='\U00002BC8 Run', command=lambda: update_output_text(output_text, str(run_btn.configure().keys())))
+run_btn = ttk.Button(button_frm, text='\U00002BC8 Run', command=lambda: update_output_text(output_text, run(run_btn.configure().keys())))
 reset_btn = ttk.Button(button_frm, text='\U0001F5D8 Reset', command=lambda: reset_output_text(output_text))
 
 content_frm = ttk.Frame(frm, padding=10)
