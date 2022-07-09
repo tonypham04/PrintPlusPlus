@@ -2,11 +2,25 @@ from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
 from tkinter import Text
+from tkinter import filedialog
+from tkinter import messagebox
 
 from backend import update_output_text
 from backend import reset_output_text
+from backend import export_to_file
+
+from io import TextIOWrapper
 
 from service import run
+
+def open_export_prompt() -> TextIOWrapper:
+    # Open a file dialog and prompt user for path if there is content to export; display a message box otherwise
+    return filedialog.asksaveasfile(filetypes = [('Text files', '.txt')], defaultextension = '.txt', initialfile = 'data')
+
+def try_export() -> None:
+    """Attempt to export data if there is any and show an error dialog otherwise."""
+    data = output_text.get('1.0', 'end')
+    export_to_file(open_export_prompt(), data) if not data.isspace() else messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error')
 
 # Create the main window of the application
 root = Tk()
@@ -22,7 +36,7 @@ frm = ttk.Frame(root, padding = 10)
 button_frm = ttk.Frame(frm, padding = 10)
 run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: update_output_text(output_text, run(run_btn.configure().keys())))
 reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_output_text(output_text))
-export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export')
+export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda: try_export())
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
