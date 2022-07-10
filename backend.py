@@ -3,6 +3,7 @@ from tkinter import Text
 from io import TextIOWrapper
 
 def update_label_text(sv: StringVar, text: str) -> None:
+    """Update the text in a Label widget."""
     sv.set(text)
 
 def update_output_text(text: Text, content: str) -> None:
@@ -21,9 +22,12 @@ def reset_output_text(text: Text) -> None:
     text.delete('1.0', 'end')
     text.config(state=current_state)
 
-def export_to_file(dialog_path: TextIOWrapper, text: str):
-    """Stores the specified content in the desired file."""
+def export_to_file(dialog_path: TextIOWrapper, text: str) -> bool:
+    """Stores the specified content in the desired file.
+
+    Returns True on success and False otherwise."""
     if dialog_path is None or text is None:
-        return
+        return False
     with open(dialog_path.name, 'w', encoding ='utf-8') as file:
         file.write(text)
+    return True

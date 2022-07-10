@@ -14,13 +14,22 @@ from io import TextIOWrapper
 from service import run
 
 def open_export_prompt() -> TextIOWrapper:
-    # Open a file dialog and prompt user for path if there is content to export; display a message box otherwise
+    """Open a file dialog and prompt user for path if there is content to export.
+
+    Display a message box otherwise."""
     return filedialog.asksaveasfile(filetypes = [('Text files', '.txt')], defaultextension = '.txt', initialfile = 'data')
 
 def try_export() -> None:
-    """Attempt to export data if there is any and show an error dialog otherwise."""
+    """Attempt to export data if there is any and show message of successful export.
+
+    Show an error dialog otherwise."""
     data = output_text.get('1.0', 'end')
-    export_to_file(open_export_prompt(), data) if not data.isspace() else messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error')
+    if not data.isspace():
+        file_path = open_export_prompt()
+        if export_to_file(file_path, data):
+            messagebox.showinfo(title = 'Export Success \U00002705', message = f'Successfully exported {file_path.name} ' + '\U0001F913')
+    else:
+        messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error \U0000274E')
 
 # Create the main window of the application
 root = Tk()
