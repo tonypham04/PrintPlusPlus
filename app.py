@@ -4,6 +4,7 @@ from tkinter import StringVar
 from tkinter import Text
 from tkinter import filedialog
 from tkinter import messagebox
+from tkinter import VERTICAL
 
 from backend import update_output_text
 from backend import reset_output_text
@@ -50,6 +51,8 @@ export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
 output_text = Text(content_frm, state = 'disabled', wrap = 'word', bg = '#D3D3D3')
+scrollbar = ttk.Scrollbar(content_frm, orient = VERTICAL, command = output_text.yview)
+output_text.configure(yscrollcommand = scrollbar.set)
 
 footer_frm = ttk.Frame(frm, padding = 10)
 quit_btn = ttk.Button(footer_frm, text = 'Quit', command = root.destroy)
@@ -64,6 +67,7 @@ export_btn.grid(row = 0, column = 2)
 
 content_frm.grid(row = 1, column = 0)
 output_text.grid(row = 1, column = 0)
+scrollbar.grid(row = 1, column = 1, sticky = 'ns')
 
 footer_frm.grid(row = 2, column = 0)
 quit_btn.grid(row = 0, column = 0)
