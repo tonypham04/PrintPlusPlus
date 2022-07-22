@@ -9,6 +9,7 @@ from tkinter import VERTICAL
 from backend import update_output_text
 from backend import reset_output_text
 from backend import export_to_file
+from backend import make_text_editable
 
 from io import TextIOWrapper
 
@@ -47,6 +48,7 @@ button_frm = ttk.Frame(frm, padding = 10)
 run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: update_output_text(output_text, run(run_btn.configure().keys())))
 reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_output_text(output_text))
 export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda: try_export())
+edit_btn = ttk.Button(button_frm, text = '\U0001F589 Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
@@ -64,6 +66,7 @@ button_frm.grid(row = 0, column = 0, sticky = 'w')
 run_btn.grid(row = 0, column = 0)
 reset_btn.grid(row = 0, column = 1, padx = 10)
 export_btn.grid(row = 0, column = 2)
+edit_btn.grid(row = 0, column = 3, padx = 10)
 
 content_frm.grid(row = 1, column = 0)
 output_text.grid(row = 1, column = 0)

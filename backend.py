@@ -31,3 +31,8 @@ def export_to_file(dialog_path: TextIOWrapper, text: str) -> bool:
     with open(dialog_path.name, 'w', encoding ='utf-8') as file:
         file.write(text)
     return True
+
+def make_text_editable(text: Text, bg_color: str) -> None:
+    """Make a Text widget editable with a visual indicator to show it is editable."""
+    text.config(state = 'normal')
+    text.config(bg = bg_color)
