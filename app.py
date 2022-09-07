@@ -6,7 +6,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import VERTICAL
 
-from backend import update_output_text
+from backend import run_function
 from backend import reset_output_text
 from backend import export_to_file
 from backend import make_text_editable
@@ -45,7 +45,7 @@ root.resizable(False, False)
 frm = ttk.Frame(root, padding = 10)
 
 button_frm = ttk.Frame(frm, padding = 10)
-run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: update_output_text(output_text, run(run_btn.configure().keys())))
+run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), '#D3D3D3'))
 reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_output_text(output_text))
 export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda: try_export())
 edit_btn = ttk.Button(button_frm, text = '\U0001F589 Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
