@@ -52,8 +52,12 @@ def make_text_readonly(text: Text, disabled_color: str) -> None:
     text.config(bg = disabled_color)
 
 def run_function(text: Text, content: str, disabled_color: str) -> None:
+    """Append output to a Text widget and make it readonly."""
     append_output_text(text, content)
     make_text_readonly(text, disabled_color)
 
 def is_empty_text(text: Text) -> bool:
+    """Checks whether a Text widget has no content.
+
+    Returns true if the Text is empty and false otherwise."""
     return text.get('1.0', 'end').isspace()
