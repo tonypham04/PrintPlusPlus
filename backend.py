@@ -56,6 +56,10 @@ def run_function(text: Text, content: str, disabled_color: str) -> None:
     append_output_text(text, content)
     make_text_readonly(text, disabled_color)
 
+def reset_function(text: Text, disabled_color: str) -> None:
+    reset_output_text(text)
+    make_text_readonly(text, disabled_color)
+
 def is_empty_text(text: Text) -> bool:
     """Checks whether a Text widget has no content.
 

@@ -7,7 +7,7 @@ from tkinter import messagebox
 from tkinter import VERTICAL
 
 from backend import run_function
-from backend import reset_output_text
+from backend import reset_function
 from backend import export_to_file
 from backend import make_text_editable
 
@@ -33,6 +33,9 @@ def try_export() -> None:
     else:
         messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error \U0000274E')
 
+# Constants
+READONLY_COLOR = '#D3D3D3'
+
 # Create the main window of the application
 root = Tk()
 root.title('Print++')
@@ -45,14 +48,14 @@ root.resizable(False, False)
 frm = ttk.Frame(root, padding = 10)
 
 button_frm = ttk.Frame(frm, padding = 10)
-run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), '#D3D3D3'))
-reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_output_text(output_text))
+run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), READONLY_COLOR))
+reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_function(output_text, READONLY_COLOR))
 export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda: try_export())
 edit_btn = ttk.Button(button_frm, text = '\U0001F589 Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
-output_text = Text(content_frm, state = 'disabled', wrap = 'word', bg = '#D3D3D3')
+output_text = Text(content_frm, state = 'disabled', wrap = 'word', bg = READONLY_COLOR)
 scrollbar = ttk.Scrollbar(content_frm, orient = VERTICAL, command = output_text.yview)
 output_text.configure(yscrollcommand = scrollbar.set)
 
