@@ -15,6 +15,15 @@ def update_output_text(text: Text, content: str) -> None:
     text.insert("1.0", content)
     text.config(state=current_state)
 
+def append_output_text(text: Text, content: str, separator = '\n') -> None:
+    """Appends text to a Text widget."""
+    if is_empty_text(text):
+        separator = ''
+    current_state = text.cget('state')
+    text.config(state = 'normal')
+    text.insert("end", f'{separator}{content}')
+    text.config(state = current_state)
+
 def reset_output_text(text: Text) -> None:
     """Deletes all text in a Text widget."""
     current_state = text.cget('state')
@@ -31,3 +40,28 @@ def export_to_file(dialog_path: TextIOWrapper, text: str) -> bool:
     with open(dialog_path.name, 'w', encoding ='utf-8') as file:
         file.write(text)
     return True
+
+def make_text_editable(text: Text, bg_color: str) -> None:
+    """Make a Text widget editable with a visual indicator to show it is editable."""
+    text.config(state = 'normal')
+    text.config(bg = bg_color)
+
+def make_text_readonly(text: Text, disabled_color: str) -> None:
+    """Make a Text widget readonly with a visual indicator to show it is not editable."""
+    text.config(state = 'disabled')
+    text.config(bg = disabled_color)
+
+def run_function(text: Text, content: str, disabled_color: str) -> None:
+    """Append output to a Text widget and make it readonly."""
+    append_output_text(text, content)
+    make_text_readonly(text, disabled_color)
+
+def reset_function(text: Text, disabled_color: str) -> None:
+    reset_output_text(text)
+    make_text_readonly(text, disabled_color)
+
+def is_empty_text(text: Text) -> bool:
+    """Checks whether a Text widget has no content.
+
+    Returns true if the Text is empty and false otherwise."""
+    return text.get('1.0', 'end').isspace()
