@@ -1,4 +1,3 @@
-# TODO: Save and close when user clicks the 'X'
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -88,6 +87,7 @@ quit_btn.grid(row = 0, column = 0)
 
 # Event bindings
 root.bind('<Escape>', lambda e: quit_btn.invoke())
+root.protocol('WM_DELETE_WINDOW', quit_btn.invoke)
 
 root.mainloop()
 
