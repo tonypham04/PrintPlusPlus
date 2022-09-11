@@ -10,6 +10,9 @@ from backend import run_function
 from backend import reset_function
 from backend import export_to_file
 from backend import make_text_editable
+from backend import save_and_close
+from backend import update_output_text
+from backend import get_initial_text
 
 from io import TextIOWrapper
 
@@ -35,6 +38,7 @@ def try_export() -> None:
 
 # Constants
 READONLY_COLOR = '#D3D3D3'
+BACKUP_FILENAME = 'temp.txt'
 
 # Create the main window of the application
 root = Tk()
@@ -60,7 +64,10 @@ scrollbar = ttk.Scrollbar(content_frm, orient = VERTICAL, command = output_text.
 output_text.configure(yscrollcommand = scrollbar.set)
 
 footer_frm = ttk.Frame(frm, padding = 10)
-quit_btn = ttk.Button(footer_frm, text = 'Quit', command = root.destroy)
+quit_btn = ttk.Button(footer_frm, text = '\U0000274C Quit', command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
+
+# Initial Setup
+update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 
 # Place widgets
 frm.grid()
@@ -77,6 +84,10 @@ scrollbar.grid(row = 1, column = 1, sticky = 'ns')
 
 footer_frm.grid(row = 2, column = 0)
 quit_btn.grid(row = 0, column = 0)
+
+# Event bindings
+root.bind('<Escape>', lambda e: quit_btn.invoke())
+root.protocol('WM_DELETE_WINDOW', quit_btn.invoke)
 
 root.mainloop()
 

@@ -1,3 +1,4 @@
+from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Text
 from io import TextIOWrapper
@@ -65,3 +66,19 @@ def is_empty_text(text: Text) -> bool:
 
     Returns true if the Text is empty and false otherwise."""
     return text.get('1.0', 'end').isspace()
+
+def save_text(filename: str, text: str) -> None:
+    """Saves text to a file."""
+    with open(f'./{filename}', 'w', encoding = 'utf-8') as file:
+        file.write(text)
+
+def save_and_close(filename: str, text: str, root: Tk):
+    """Saves text to a file and close the application."""
+    save_text(filename, text)
+    root.destroy()
+
+def get_initial_text(filename: str) -> str:
+    """Returns the string contents from a backup file."""
+    with open(f'./{filename}', 'r', encoding = 'utf-8') as file:
+        initial_text = file.read()
+    return initial_text
