@@ -79,6 +79,9 @@ def save_and_close(filename: str, text: str, root: Tk):
 
 def get_initial_text(filename: str) -> str:
     """Returns the string contents from a backup file."""
-    with open(f'./{filename}', 'r', encoding = 'utf-8') as file:
-        initial_text = file.read()
+    try:
+        with open(f'./{filename}', 'r', encoding = 'utf-8') as file:
+            initial_text = file.read()
+    except FileNotFoundError:
+        initial_text = ''
     return initial_text
