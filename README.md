@@ -4,7 +4,8 @@ The intent behind this project was just a fun way to learn more about the Python
 ## Latest Changes (Sunday, September 11, 2022)
 - An edit button is now available allowing you use the software as a basic text editor but also allows you to edit content output from clicking "Run".
 - Output from clicking "Run" now appends text to the text area instead of overwriting it.
-- Closing the app by clicking the 'X', pressing the 'Quit' button or pressing the ESC key now saves text content to a temp.txt file
+- Closing the app by clicking the 'X', pressing the 'Quit' button, or pressing the ESC key now saves text content to a temporary text file.
+- The app now starts loading text from the user's last open session.
 ## Latest Changes (Sunday July 17, 2022)
 - A vertical scrollbar is now available to make seeing text in the output area easier.
 ## Latest Changes (Sunday July 10, 2022)
