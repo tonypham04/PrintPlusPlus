@@ -1,3 +1,4 @@
+# TODO: Add '+' icon to appending text from a file menu option?
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -5,6 +6,7 @@ from tkinter import Text
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import VERTICAL
+from tkinter import Menu
 
 from backend import run_function
 from backend import reset_function
@@ -13,6 +15,7 @@ from backend import make_text_editable
 from backend import save_and_close
 from backend import update_output_text
 from backend import get_initial_text
+from backend import append_text_from_file
 
 from io import TextIOWrapper
 
@@ -47,6 +50,8 @@ root.minsize(300, 100)
 # Built-in options: error, gray25, gray50, hourglass, info, questhead, question, warning
 root.iconbitmap('hourglass')
 root.resizable(False, False)
+# Remove dashed line from menu
+root.option_add('*tearOff', False)
 
 # Create widgets
 frm = ttk.Frame(root, padding = 10)
@@ -69,7 +74,14 @@ quit_btn = ttk.Button(footer_frm, text = '\U0000274C Quit', command = lambda: sa
 # Initial Setup
 update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 
+# Create menubar
+menubar = Menu(root)
+file_menu = Menu(menubar)
+file_menu.add_command(label = 'Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
+menubar.add_cascade(menu = file_menu, label = 'File')
+
 # Place widgets
+root.configure(menu = menubar)
 frm.grid()
 
 button_frm.grid(row = 0, column = 0, sticky = 'w')
@@ -91,4 +103,4 @@ root.protocol('WM_DELETE_WINDOW', quit_btn.invoke)
 
 root.mainloop()
 
-#TODO: http://tkdocs.com/tutorial/index.html
+#TODO: https://tkdocs.com/tutorial/menus.html

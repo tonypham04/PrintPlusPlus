@@ -85,3 +85,16 @@ def get_initial_text(filename: str) -> str:
     except FileNotFoundError:
         initial_text = ''
     return initial_text
+
+# Menubar functions
+def get_text_from_file(file_path: str) -> str:
+    """Returns the text content from a file."""
+    with open(file_path, 'r', encoding = 'utf-8') as file:
+        return file.read()
+
+def append_text_from_file(text: Text, file_path: TextIOWrapper, separator = '\n') -> None:
+    """Appends text from a text file to a Text widget."""
+    if file_path is None:
+        return
+    file_text = get_text_from_file(file_path.name)
+    append_output_text(text, file_text, separator)
