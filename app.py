@@ -43,6 +43,8 @@ def try_export() -> None:
 # Constants
 READONLY_COLOR = '#D3D3D3'
 BACKUP_FILENAME = 'temp.txt'
+# Icons
+QUIT_ICON = '\U0000274C'
 
 # Create the main window of the application
 root = Tk()
@@ -70,7 +72,7 @@ scrollbar = ttk.Scrollbar(content_frm, orient = VERTICAL, command = output_text.
 output_text.configure(yscrollcommand = scrollbar.set)
 
 footer_frm = ttk.Frame(frm, padding = 10)
-quit_btn = ttk.Button(footer_frm, text = '\U0000274C Quit', command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
+quit_btn = ttk.Button(footer_frm, text = f'{QUIT_ICON} Quit', command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
 
 # Initial Setup
 update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
@@ -79,6 +81,8 @@ update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 menubar = Menu(root)
 file_menu = Menu(menubar)
 file_menu.add_command(label = '\u2795 Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
+file_menu.add_separator()
+file_menu.add_command(label = f'{QUIT_ICON} Quit', command = quit_btn.invoke)
 menubar.add_cascade(menu = file_menu, label = 'File')
 
 # Place widgets
