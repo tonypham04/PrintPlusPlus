@@ -1,4 +1,5 @@
-# TODO: Add '+' icon to appending text from a file menu option?
+# TODO: Add 'Quit' command to 'File' menu
+# TODO: Add 'Actions' file menu option containing commands to 'Run', 'Reset', 'Export' and 'Edit'
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -77,7 +78,7 @@ update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 # Create menubar
 menubar = Menu(root)
 file_menu = Menu(menubar)
-file_menu.add_command(label = 'Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
+file_menu.add_command(label = '\u2795 Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
 menubar.add_cascade(menu = file_menu, label = 'File')
 
 # Place widgets
