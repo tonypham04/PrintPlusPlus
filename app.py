@@ -1,5 +1,4 @@
-# TODO: Add 'Quit' command to 'File' menu
-# TODO: Add 'Actions' file menu option containing commands to 'Run', 'Reset', 'Export' and 'Edit'
+# TODO: Add button for appending text from a file?
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -44,6 +43,10 @@ def try_export() -> None:
 READONLY_COLOR = '#D3D3D3'
 BACKUP_FILENAME = 'temp.txt'
 # Icons
+RUN_ICON = '\U00002BC8'
+RESET_ICON = '\U0001F5D8'
+EXPORT_ICON = '\U0001F4BE'
+EDIT_ICON = '\U0001F589'
 QUIT_ICON = '\U0000274C'
 
 # Create the main window of the application
@@ -60,10 +63,10 @@ root.option_add('*tearOff', False)
 frm = ttk.Frame(root, padding = 10)
 
 button_frm = ttk.Frame(frm, padding = 10)
-run_btn = ttk.Button(button_frm, text = '\U00002BC8 Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), READONLY_COLOR))
-reset_btn = ttk.Button(button_frm, text = '\U0001F5D8 Reset', command = lambda: reset_function(output_text, READONLY_COLOR))
-export_btn = ttk.Button(button_frm, text = '\U0001F4BE Export', command = lambda: try_export())
-edit_btn = ttk.Button(button_frm, text = '\U0001F589 Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
+run_btn = ttk.Button(button_frm, text = f'{RUN_ICON} Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), READONLY_COLOR))
+reset_btn = ttk.Button(button_frm, text = f'{RESET_ICON} Reset', command = lambda: reset_function(output_text, READONLY_COLOR))
+export_btn = ttk.Button(button_frm, text = f'{EXPORT_ICON} Export', command = lambda: try_export())
+edit_btn = ttk.Button(button_frm, text = f'{EDIT_ICON} Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
@@ -79,11 +82,20 @@ update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 
 # Create menubar
 menubar = Menu(root)
+# File menu
 file_menu = Menu(menubar)
 file_menu.add_command(label = '\u2795 Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
+file_menu.add_command(label = f'{EXPORT_ICON} Export to text file..', command = export_btn.invoke)
 file_menu.add_separator()
 file_menu.add_command(label = f'{QUIT_ICON} Quit', command = quit_btn.invoke)
+# Actions menu
+actions_menu = Menu(menubar)
+actions_menu.add_command(label = f'{RUN_ICON} Run', command = run_btn.invoke)
+actions_menu.add_command(label = f'{RESET_ICON} Reset', command = reset_btn.invoke)
+actions_menu.add_command(label = f'{EDIT_ICON} Edit', command = edit_btn.invoke)
+# Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
+menubar.add_cascade(menu = actions_menu, label = 'Actions')
 
 # Place widgets
 root.configure(menu = menubar)
