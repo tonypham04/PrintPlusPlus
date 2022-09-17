@@ -1,4 +1,3 @@
-# TODO: Add button for appending text from a file?
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -47,6 +46,7 @@ RUN_ICON = '\U00002BC8'
 RESET_ICON = '\U0001F5D8'
 EXPORT_ICON = '\U0001F4BE'
 EDIT_ICON = '\U0001F589'
+BOOK_ICON = '\U0001F4D6'
 QUIT_ICON = '\U0000274C'
 
 # Create the main window of the application
@@ -93,9 +93,20 @@ actions_menu = Menu(menubar)
 actions_menu.add_command(label = f'{RUN_ICON} Run', command = run_btn.invoke)
 actions_menu.add_command(label = f'{RESET_ICON} Reset', command = reset_btn.invoke)
 actions_menu.add_command(label = f'{EDIT_ICON} Edit', command = edit_btn.invoke)
+# About menu
+about_menu = Menu(menubar)
+about_menu.add_command(label = f'{BOOK_ICON} Run function..', command = lambda: messagebox.showinfo(title = 'Run function documentation', message = run_function.__doc__))
+about_menu.add_command(label = f'{BOOK_ICON} Reset function..', command = lambda: messagebox.showinfo(title = 'Reset function documentation', message = reset_function.__doc__))
+about_menu.add_command(label = f'{BOOK_ICON} Edit function..', command = lambda: messagebox.showinfo(title = 'Edit function documentation', message = make_text_editable.__doc__))
+about_menu.add_separator()
+about_menu.add_command(label = f'{BOOK_ICON} Adding text from file..', command = lambda: messagebox.showinfo(title = 'Adding text from file documentation', message = append_text_from_file.__doc__))
+about_menu.add_command(label = f'{BOOK_ICON} Export to text file..', command = lambda: messagebox.showinfo(title = 'Export function documentation', message = try_export.__doc__))
+about_menu.add_separator()
+about_menu.add_command(label = f'{BOOK_ICON} Quit function..', command = lambda: messagebox.showinfo(title = 'Quit function documentation', message = save_and_close.__doc__))
 # Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
 menubar.add_cascade(menu = actions_menu, label = 'Actions')
+menubar.add_cascade(menu = about_menu, label = 'About')
 
 # Place widgets
 root.configure(menu = menubar)
@@ -119,5 +130,3 @@ root.bind('<Escape>', lambda e: quit_btn.invoke())
 root.protocol('WM_DELETE_WINDOW', quit_btn.invoke)
 
 root.mainloop()
-
-#TODO: https://tkdocs.com/tutorial/menus.html

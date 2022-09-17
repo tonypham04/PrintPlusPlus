@@ -58,6 +58,7 @@ def run_function(text: Text, content: str, disabled_color: str) -> None:
     make_text_readonly(text, disabled_color)
 
 def reset_function(text: Text, disabled_color: str) -> None:
+    """Clears all contents in a Text widget and makes it readonly."""
     reset_output_text(text)
     make_text_readonly(text, disabled_color)
 
