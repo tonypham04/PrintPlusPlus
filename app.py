@@ -63,10 +63,9 @@ root.option_add('*tearOff', False)
 frm = ttk.Frame(root, padding = 10)
 
 button_frm = ttk.Frame(frm, padding = 10)
-run_btn = ttk.Button(button_frm, text = f'{RUN_ICON} Run', command = lambda: run_function(output_text, run(run_btn.configure().keys()), READONLY_COLOR))
-reset_btn = ttk.Button(button_frm, text = f'{RESET_ICON} Reset', command = lambda: reset_function(output_text, READONLY_COLOR))
-export_btn = ttk.Button(button_frm, text = f'{EXPORT_ICON} Export', command = lambda: try_export())
-edit_btn = ttk.Button(button_frm, text = f'{EDIT_ICON} Edit', command = lambda: make_text_editable(output_text, '#dbe9f4'))
+run_btn = ttk.Button(button_frm, text = RUN_ICON, command = lambda: run_function(output_text, run(run_btn.configure().keys()), READONLY_COLOR))
+reset_btn = ttk.Button(button_frm, text = RESET_ICON, command = lambda: reset_function(output_text, READONLY_COLOR))
+edit_btn = ttk.Button(button_frm, text = EDIT_ICON, command = lambda: make_text_editable(output_text, '#dbe9f4'))
 
 content_frm = ttk.Frame(frm, padding=10)
 results_txt = StringVar()
@@ -75,7 +74,7 @@ scrollbar = ttk.Scrollbar(content_frm, orient = VERTICAL, command = output_text.
 output_text.configure(yscrollcommand = scrollbar.set)
 
 footer_frm = ttk.Frame(frm, padding = 10)
-quit_btn = ttk.Button(footer_frm, text = f'{QUIT_ICON} Quit', command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
+quit_btn = ttk.Button(footer_frm, text = QUIT_ICON, command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
 
 # Initial Setup
 update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
@@ -85,7 +84,7 @@ menubar = Menu(root)
 # File menu
 file_menu = Menu(menubar)
 file_menu.add_command(label = '\u2795 Add text from file..', command = lambda: append_text_from_file(output_text, filedialog.askopenfile(filetypes = [('Text files', '.txt')])))
-file_menu.add_command(label = f'{EXPORT_ICON} Export to text file..', command = export_btn.invoke)
+file_menu.add_command(label = f'{EXPORT_ICON} Export to text file..', command = try_export)
 file_menu.add_separator()
 file_menu.add_command(label = f'{QUIT_ICON} Quit', command = quit_btn.invoke)
 # Actions menu
@@ -115,8 +114,7 @@ frm.grid()
 button_frm.grid(row = 0, column = 0, sticky = 'w')
 run_btn.grid(row = 0, column = 0)
 reset_btn.grid(row = 0, column = 1, padx = 10)
-export_btn.grid(row = 0, column = 2)
-edit_btn.grid(row = 0, column = 3, padx = 10)
+edit_btn.grid(row = 0, column = 2)
 
 content_frm.grid(row = 1, column = 0)
 output_text.grid(row = 1, column = 0)
