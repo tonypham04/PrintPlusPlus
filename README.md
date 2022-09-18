@@ -1,6 +1,10 @@
 # PrintPlusPlus
 The intent behind this project was just a fun way to learn more about the Python programming language and see the output from playing with different python functions/features in a custom made GUI as oppose to the console window.  
-![Animation showing the ability to edit the output text in PrintPlusPlus](gifs/edit-demo.gif "Text Editing in Print++")
+![Animation showing the ability to edit the output text in PrintPlusPlus](gifs/menubar-demo.gif "Menu bar functions in Print++")
+## Latest Changes (Sunday, September 18, 2022)
+- A menu bar is now available to access all Print++ functions along with documentation on the app's capabilities.
+- It is now possible to append text from a text file into the app's text area from the file menu in the menu bar.
+- Small refactor to icons used more than once which are now stored in global variables.
 ## Latest Changes (Sunday, September 11, 2022)
 - An edit button is now available allowing you use the software as a basic text editor but also allows you to edit content output from clicking "Run".
 - Output from clicking "Run" now appends text to the text area instead of overwriting it.
