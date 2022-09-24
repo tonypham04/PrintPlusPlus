@@ -102,10 +102,22 @@ about_menu.add_command(label = f'{BOOK_ICON} Adding text from file..', command =
 about_menu.add_command(label = f'{BOOK_ICON} Export to text file..', command = lambda: messagebox.showinfo(title = 'Export function documentation', message = try_export.__doc__))
 about_menu.add_separator()
 about_menu.add_command(label = f'{BOOK_ICON} Quit function..', command = lambda: messagebox.showinfo(title = 'Quit function documentation', message = save_and_close.__doc__))
+# Themes menu
+style = ttk.Style()
+default_theme = style.theme_use()
+themes_menu = Menu(menubar)
+themes_sv = StringVar()
+for theme in style.theme_names():
+    # There is a built-in theme called 'default' but want to use 'default' to restore default theme
+    if theme.lower() != 'default':
+        themes_menu.add_radiobutton(label = theme, variable = themes_sv, command = lambda theme = theme: style.theme_use(theme))
+themes_menu.add_separator()
+themes_menu.add_radiobutton(label = 'default', variable = themes_sv, command = lambda: style.theme_use(default_theme))
 # Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
 menubar.add_cascade(menu = actions_menu, label = 'Actions')
 menubar.add_cascade(menu = about_menu, label = 'About')
+menubar.add_cascade(menu = themes_menu, label = 'Themes')
 
 # Place widgets
 root.configure(menu = menubar)
