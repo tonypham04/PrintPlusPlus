@@ -41,9 +41,20 @@ def try_export() -> None:
         messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error \U0000274E')
 
 def update_palette(name: str):
-    StyleManager.apply_styles('button', name, button_frm)
-    StyleManager.apply_styles('button', name, footer_frm)
-
+    if name != None:
+        StyleManager.apply_styles('button', name, button_frm)
+        StyleManager.apply_styles('button', name, footer_frm)
+        StyleManager.apply_styles('frame', name, frm)
+        StyleManager.apply_styles('frame', name, button_frm, use_primary_color = True)
+        StyleManager.apply_styles('frame', name, content_frm)
+        StyleManager.apply_styles('frame', name, footer_frm, use_primary_color = True)
+    else:
+        StyleManager.remove_child_styles(button_frm)
+        StyleManager.remove_child_styles(footer_frm)
+        StyleManager.remove_widget_styles(frm)
+        StyleManager.remove_widget_styles(button_frm)
+        StyleManager.remove_widget_styles(content_frm)
+        StyleManager.remove_widget_styles(footer_frm)
 # Constants
 READONLY_COLOR = '#D3D3D3'
 BACKUP_FILENAME = 'temp.txt'
