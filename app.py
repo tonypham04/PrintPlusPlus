@@ -20,6 +20,8 @@ from io import TextIOWrapper
 
 from service import run
 
+from stylemanager import StyleManager
+
 def open_export_prompt() -> TextIOWrapper:
     """Open a file dialog and prompt user for path if there is content to export.
 
@@ -37,6 +39,10 @@ def try_export() -> None:
             messagebox.showinfo(title = 'Export Success \U00002705', message = f'Successfully exported {file_path.name} ' + '\U0001F913')
     else:
         messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error \U0000274E')
+
+def update_palette(name: str):
+    StyleManager.apply_styles('button', name, button_frm)
+    StyleManager.apply_styles('button', name, footer_frm)
 
 # Constants
 READONLY_COLOR = '#D3D3D3'
@@ -112,12 +118,21 @@ for theme in style.theme_names():
     if theme.lower() != 'default':
         themes_menu.add_radiobutton(label = theme, variable = themes_sv, command = lambda theme = theme: style.theme_use(theme))
 themes_menu.add_separator()
-themes_menu.add_radiobutton(label = 'default', variable = themes_sv, command = lambda: style.theme_use(default_theme))
+themes_menu.add_radiobutton(label = 'Restore default..', variable = themes_sv, command = lambda: style.theme_use(default_theme))
+# Palettes menu
+palettes_menu = Menu(menubar)
+palettes_sv = StringVar()
+palettes_menu.add_radiobutton(label = 'coolblue', variable = palettes_sv, command = lambda: update_palette('coolblue'))
+palettes_menu.add_radiobutton(label = 'retrored', variable = palettes_sv, command = lambda: update_palette('retrored'))
+palettes_menu.add_radiobutton(label = 'cozygreen', variable = palettes_sv, command = lambda: update_palette('cozygreen'))
+palettes_menu.add_separator()
+palettes_menu.add_radiobutton(label = 'Restore default..', variable = palettes_sv, command = lambda: update_palette(None))
 # Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
 menubar.add_cascade(menu = actions_menu, label = 'Actions')
 menubar.add_cascade(menu = about_menu, label = 'About')
 menubar.add_cascade(menu = themes_menu, label = 'Themes')
+menubar.add_cascade(menu = palettes_menu, label = 'Palettes')
 
 # Place widgets
 root.configure(menu = menubar)
