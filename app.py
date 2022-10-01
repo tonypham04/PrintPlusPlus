@@ -66,6 +66,8 @@ EXPORT_ICON = '\U0001F4BE'
 EDIT_ICON = '\U0001F589'
 BOOK_ICON = '\U0001F4D6'
 QUIT_ICON = '\U0000274C'
+THEMES_ICON = '\U00002728'
+PALETTE_ICON = '\U0001F3A8'
 
 # Create the main window of the application
 root = Tk()
@@ -128,15 +130,15 @@ themes_sv = StringVar()
 for theme in style.theme_names():
     # There is a built-in theme called 'default' but want to use 'default' to restore default theme
     if theme.lower() != 'default':
-        themes_menu.add_radiobutton(label = theme, variable = themes_sv, command = lambda theme = theme: style.theme_use(theme))
+        themes_menu.add_radiobutton(label = f'{THEMES_ICON} {theme}', variable = themes_sv, command = lambda theme = theme: style.theme_use(theme))
 themes_menu.add_separator()
 themes_menu.add_radiobutton(label = 'Restore default..', variable = themes_sv, command = lambda: style.theme_use(default_theme))
 # Palettes menu
 palettes_menu = Menu(menubar)
 palettes_sv = StringVar()
-palettes_menu.add_radiobutton(label = 'coolblue', variable = palettes_sv, command = lambda: update_palette('coolblue'))
-palettes_menu.add_radiobutton(label = 'retrored', variable = palettes_sv, command = lambda: update_palette('retrored'))
-palettes_menu.add_radiobutton(label = 'cozygreen', variable = palettes_sv, command = lambda: update_palette('cozygreen'))
+palettes_menu.add_radiobutton(label = f'{PALETTE_ICON} coolblue', variable = palettes_sv, command = lambda: update_palette('coolblue'))
+palettes_menu.add_radiobutton(label = f'{PALETTE_ICON} retrored', variable = palettes_sv, command = lambda: update_palette('retrored'))
+palettes_menu.add_radiobutton(label = f'{PALETTE_ICON} cozygreen', variable = palettes_sv, command = lambda: update_palette('cozygreen'))
 palettes_menu.add_separator()
 palettes_menu.add_radiobutton(label = 'Restore default..', variable = palettes_sv, command = lambda: update_palette(None))
 # Add menus to menubar
