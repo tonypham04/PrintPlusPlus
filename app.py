@@ -41,6 +41,7 @@ def try_export() -> None:
         messagebox.showerror(message = 'There is nothing to export. \U0001F641', title = 'Export Error \U0000274E')
 
 def update_palette(name: str):
+    """Update the UI according to a specified style."""
     if name != None:
         StyleManager.apply_styles('button', name, button_frm)
         StyleManager.apply_styles('button', name, footer_frm)
