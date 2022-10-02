@@ -1,6 +1,11 @@
 # PrintPlusPlus
 The intent behind this project was just a fun way to learn more about the Python programming language and see the output from playing with different python functions/features in a custom made GUI as oppose to the console window.  
-![Animation showing the ability to edit the output text in PrintPlusPlus](gifs/menubar-demo.gif "Menu bar functions in Print++")
+![Animation showing the ability to change the theme and palette used in PrintPlusPlus](gifs/themes-and-palettes-demo.gif "Look and feel functions in Print++")
+## Latest Changes (Sunday, October 2, 2022)
+- Top buttons now reflect the "Actions" available in Print++ (i.e. Exporting is now exclusive to the menu bar).
+- Removed text from buttons for a cleaner look.
+- Add "Themes" option in menu bar allowing the user to change the feel of the app using one of many built-in themes.
+- The "Palettes" option in the menu bar allows the user to change the UI colors from a set of pre-made options.
 ## Latest Changes (Sunday, September 18, 2022)
 - A menu bar is now available to access all Print++ functions along with documentation on the app's capabilities.
 - It is now possible to append text from a text file into the app's text area from the file menu in the menu bar.
