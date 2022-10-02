@@ -6,6 +6,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import VERTICAL
 from tkinter import Menu
+from idlelib.tooltip import Hovertip
 
 from backend import run_function
 from backend import reset_function
@@ -98,6 +99,12 @@ quit_btn = ttk.Button(footer_frm, text = QUIT_ICON, command = lambda: save_and_c
 
 # Initial Setup
 update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
+
+# Tooltips
+run_tooltip = Hovertip(run_btn, 'Run', 500)
+reset_tooltip = Hovertip(reset_btn, 'Reset', 500)
+edit_tooltip = Hovertip(edit_btn, 'Edit', 500)
+quit_tooltip = Hovertip(quit_btn, 'Quit', 500)
 
 # Create menubar
 menubar = Menu(root)
