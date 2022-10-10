@@ -1,3 +1,6 @@
+# TODO: UI for preferences menu (palettes)
+# TODO: Backend to save preferences to a JSON file
+# TODO: Read preferences from JSON file
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -69,6 +72,7 @@ BOOK_ICON = '\U0001F4D6'
 QUIT_ICON = '\U0000274C'
 THEMES_ICON = '\U00002728'
 PALETTE_ICON = '\U0001F3A8'
+SETTINGS_ICON = '\U00002699'
 
 # Create the main window of the application
 root = Tk()
@@ -148,12 +152,21 @@ palettes_menu.add_radiobutton(label = f'{PALETTE_ICON} retrored', variable = pal
 palettes_menu.add_radiobutton(label = f'{PALETTE_ICON} cozygreen', variable = palettes_sv, command = lambda: update_palette('cozygreen'))
 palettes_menu.add_separator()
 palettes_menu.add_radiobutton(label = 'Restore default..', variable = palettes_sv, command = lambda: update_palette(None))
+# Preferences menu
+preferences_menu = Menu(menubar)
+theme_preferences = Menu(preferences_menu)
+theme_preference_sv = StringVar()
+for theme in style.theme_names():
+    if theme.lower() != 'default':
+        theme_preferences.add_radiobutton(label = f'{THEMES_ICON} {theme} (default)' if theme.lower() == default_theme.lower() else f'{THEMES_ICON} {theme}', variable = theme_preference_sv)
+preferences_menu.add_cascade(menu = theme_preferences, label = f'{SETTINGS_ICON} Themes')
 # Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
 menubar.add_cascade(menu = actions_menu, label = 'Actions')
 menubar.add_cascade(menu = about_menu, label = 'About')
 menubar.add_cascade(menu = themes_menu, label = 'Themes')
 menubar.add_cascade(menu = palettes_menu, label = 'Palettes')
+menubar.add_cascade(menu = preferences_menu, label = 'Preferences')
 
 # Place widgets
 root.configure(menu = menubar)
