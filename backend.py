@@ -2,6 +2,7 @@ from tkinter import Tk
 from tkinter import StringVar
 from tkinter import Text
 from io import TextIOWrapper
+import json
 
 def update_label_text(sv: StringVar, text: str) -> None:
     """Update the text in a Label widget."""
@@ -76,6 +77,7 @@ def save_text(filename: str, text: str) -> None:
 def save_and_close(filename: str, text: str, root: Tk):
     """Saves text to a file and close the application."""
     save_text(filename, text)
+    update_settings_file()
     root.destroy()
 
 def get_initial_text(filename: str) -> str:
@@ -99,3 +101,16 @@ def append_text_from_file(text: Text, file_path: TextIOWrapper, separator = '\n'
         return
     file_text = get_text_from_file(file_path.name)
     append_output_text(text, file_text, separator)
+
+# Settings
+settings = {
+    'theme': 'default'
+}
+
+def update_settings(key: str, value: str) -> None:
+    """Updates a settings valuye in the settings dictionary"""
+    settings[key] = value
+
+def update_settings_file() -> None:
+    """Overwrite the settings JSON file with the current values in the settings dictionary."""
+    save_text('settings.json', json.dumps(settings))

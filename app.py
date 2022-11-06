@@ -1,5 +1,4 @@
 # TODO: UI for preferences menu (palettes)
-# TODO: Backend to save preferences to a JSON file
 # TODO: Read preferences from JSON file
 from tkinter import Tk
 from tkinter import ttk
@@ -19,6 +18,7 @@ from backend import save_and_close
 from backend import update_output_text
 from backend import get_initial_text
 from backend import append_text_from_file
+from backend import update_settings
 
 from io import TextIOWrapper
 
@@ -60,6 +60,7 @@ def update_palette(name: str):
         StyleManager.remove_widget_styles(button_frm)
         StyleManager.remove_widget_styles(content_frm)
         StyleManager.remove_widget_styles(footer_frm)
+
 # Constants
 READONLY_COLOR = '#D3D3D3'
 BACKUP_FILENAME = 'temp.txt'
@@ -158,7 +159,7 @@ theme_preferences = Menu(preferences_menu)
 theme_preference_sv = StringVar()
 for theme in style.theme_names():
     if theme.lower() != 'default':
-        theme_preferences.add_radiobutton(label = f'{THEMES_ICON} {theme} (default)' if theme.lower() == default_theme.lower() else f'{THEMES_ICON} {theme}', variable = theme_preference_sv)
+        theme_preferences.add_radiobutton(label = f'{THEMES_ICON} {theme} (default)' if theme.lower() == default_theme.lower() else f'{THEMES_ICON} {theme}', variable = theme_preference_sv, command = lambda theme = theme: update_settings('theme', theme))
 preferences_menu.add_cascade(menu = theme_preferences, label = f'{SETTINGS_ICON} Themes')
 # Add menus to menubar
 menubar.add_cascade(menu = file_menu, label = 'File')
