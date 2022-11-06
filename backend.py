@@ -103,9 +103,7 @@ def append_text_from_file(text: Text, file_path: TextIOWrapper, separator = '\n'
     append_output_text(text, file_text, separator)
 
 # Settings
-settings = {
-    'theme': 'default'
-}
+settings = {}
 
 def update_settings(key: str, value: str) -> None:
     """Updates a settings valuye in the settings dictionary"""
@@ -114,3 +112,12 @@ def update_settings(key: str, value: str) -> None:
 def update_settings_file() -> None:
     """Overwrite the settings JSON file with the current values in the settings dictionary."""
     save_text('settings.json', json.dumps(settings))
+
+def get_initial_settings(filename: str) -> dict:
+    try:
+        with open(f'./{filename}', 'r', encoding = 'utf-8') as file:
+            settings = json.load(file)
+            print(json.dumps(settings, indent = 4))
+    except FileNotFoundError:
+        settings = {}
+    return settings

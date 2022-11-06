@@ -1,5 +1,4 @@
 # TODO: UI for preferences menu (palettes)
-# TODO: Read preferences from JSON file
 from tkinter import Tk
 from tkinter import ttk
 from tkinter import StringVar
@@ -19,6 +18,7 @@ from backend import update_output_text
 from backend import get_initial_text
 from backend import append_text_from_file
 from backend import update_settings
+from backend import get_initial_settings
 
 from io import TextIOWrapper
 
@@ -61,6 +61,20 @@ def update_palette(name: str):
         StyleManager.remove_widget_styles(content_frm)
         StyleManager.remove_widget_styles(footer_frm)
 
+def start_up() -> None:
+    """Set up the app with initial starting values."""
+    update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
+    # Load settings from JSON file
+    init_settings = get_initial_settings('settings.json')
+    # Apply the settings to the app
+    for key, value in init_settings.items():
+        apply_setting(key, value)
+
+def apply_setting(key: str, value: str) -> None:
+    """Applies the specified setting to the app."""
+    if key == 'theme':
+        style.theme_use(value)
+
 # Constants
 READONLY_COLOR = '#D3D3D3'
 BACKUP_FILENAME = 'temp.txt'
@@ -101,9 +115,6 @@ output_text.configure(yscrollcommand = scrollbar.set)
 
 footer_frm = ttk.Frame(frm, padding = 10)
 quit_btn = ttk.Button(footer_frm, text = QUIT_ICON, command = lambda: save_and_close(BACKUP_FILENAME, output_text.get('1.0', 'end'), root))
-
-# Initial Setup
-update_output_text(output_text, get_initial_text(BACKUP_FILENAME))
 
 # Tooltips
 run_tooltip = Hovertip(run_btn, 'Run', 500)
@@ -188,5 +199,7 @@ quit_btn.grid(row = 0, column = 0)
 # Event bindings
 root.bind('<Escape>', lambda e: quit_btn.invoke())
 root.protocol('WM_DELETE_WINDOW', quit_btn.invoke)
+
+start_up()
 
 root.mainloop()
